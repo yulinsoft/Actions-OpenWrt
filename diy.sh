@@ -29,5 +29,5 @@ sed -i 's/<0x54c0000 0x2ac0000>/<0x7f00000 0x80000>/g' target/linux/ramips/dts/m
 sed -i 's/32768k/129280k/g' target/linux/ramips/image/mt7621.mk
 # Delete Lean password
 sed -i '/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF./d' package/lean/default-settings/files/zzz-default-settings
-sed '$a\CONFIG_CIFS_ALLOW_INSECURE_LEGACY=y' target/linux/ramips/mt7621/config-4.14
+# sed '$a\CONFIG_CIFS_ALLOW_INSECURE_LEGACY=y' target/linux/ramips/mt7621/config-4.14
 echo 'modify completed.'
