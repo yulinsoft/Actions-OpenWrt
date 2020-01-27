@@ -83,7 +83,6 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        sed '$a\CONFIG_CIFS_ALLOW_INSECURE_LEGACY=y' build_dir/target-mipsel_24kc_musl/linux-ramips_mt7621/linux-4.14.162/.cofig
         make -j$(nproc)
 
     - name: Single-thread compile
