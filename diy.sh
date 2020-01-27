@@ -6,7 +6,9 @@
 # Blog: https://p3terx.com
 #=================================================
 # Modify default IP
-#sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+sed -i "s/hostname='OpenWrt'/hostname='Hiwif-B70'/g" package/base-files/files/bin/config_generate
+sed -i "s/ssid=OpenWrt/ssid=Hiwif-B70/g" package/kernel/mac80211/files/lib/wifi/mac80211.sh_generate
 # Modify Mac
 sed -i 's/$(mtd_get_mac_ascii bdinfo "Vfac_mac ")/$(mtd_get_mac_binary factory 0xe000)/g' target/linux/ramips/mt7621/base-files/etc/board.d/02_network
 # Modify dts
@@ -29,5 +31,4 @@ sed -i 's/<0x54c0000 0x2ac0000>/<0x7f00000 0x80000>/g' target/linux/ramips/dts/m
 sed -i 's/32768k/129280k/g' target/linux/ramips/image/mt7621.mk
 # Delete Lean password
 sed -i '/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF./d' package/lean/default-settings/files/zzz-default-settings
-# sed '$a\CONFIG_CIFS_ALLOW_INSECURE_LEGACY=y' target/linux/ramips/mt7621/config-4.14
 echo 'modify completed.'
