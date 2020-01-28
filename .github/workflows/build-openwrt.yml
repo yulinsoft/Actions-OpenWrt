@@ -95,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_bin
+        name: OpenWrt_Hiwif-B70_bin
         path: openwrt/bin
 
     - name: Organize files
@@ -109,5 +109,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_firmware
+        name: OpenWrt_Hiwif-B70_firmware
         path: ${{ env.FIRMWARE }}
