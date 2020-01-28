@@ -109,5 +109,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_firmware
+        name: OpenWrt_Youku-L1_firmware
         path: ${{ env.FIRMWARE }}
