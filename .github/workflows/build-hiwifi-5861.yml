@@ -15,7 +15,7 @@ on:
 #    branches: 
 #      - master
 #    paths:
-#      - 'ykl1.config'
+#      - 'hiwifi-5861.config'
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
@@ -61,13 +61,13 @@ jobs:
     - name: Load custom configuration
       env:
         CONFIG_FILE: 'hiwifi-5861.config'
-        # DIY_SH: 'diy.sh'
+        DIY_SH: 'comdiy.sh'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         # chmod +x $DIY_SH
         cd openwrt
-        #../$DIY_SH
+        ../$DIY_SH
         make defconfig
 
 #    - name: SSH connection to Actions
