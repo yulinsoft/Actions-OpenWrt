@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Hiwif-B70
+name: Build Hiwifi-B70
 
 on: 
   release:
@@ -95,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_Hiwif-B70_bin
+        name: OpenWrt_Hiwifi-B70_bin
         path: openwrt/bin
 
     - name: Organize files
@@ -109,5 +109,5 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_Hiwif-B70_firmware
+        name: OpenWrt_Hiwifi-B70_firmware
         path: ${{ env.FIRMWARE }}
