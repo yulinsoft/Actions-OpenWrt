@@ -1,4 +1,8 @@
 # Actions-OpenWrt
+![Build Hiwifi-5861](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Hiwifi-5861/badge.svg)
+![Build Youku-L1](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Youku-L1/badge.svg)
+![Build Hiwif-B70](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Hiwif-B70/badge.svg)
+![Build Newifi-3](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Newifi-3/badge.svg)
 
 
 
