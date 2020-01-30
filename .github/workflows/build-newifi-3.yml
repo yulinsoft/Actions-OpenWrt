@@ -11,11 +11,11 @@ name: Build Newifi-3
 on: 
   release:
     types: [published]
-#  push:
-#    branches: 
-#      - master
-#    paths:
-#      - 'newifi3.config'
+  push:
+    branches: 
+      - master
+    paths:
+      - 'LICENSE'
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
