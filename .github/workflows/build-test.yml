@@ -29,6 +29,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+    - run: npm install
+    - run: npm test
+
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
