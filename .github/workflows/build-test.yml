@@ -6,11 +6,11 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build testRelease
+name: Build Test-Upload-Release
 
 on: 
-  release:
-    types: [published]
+#  release:
+#    types: [published]
   push:
     branches: 
       - master
