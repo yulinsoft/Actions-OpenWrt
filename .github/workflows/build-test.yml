@@ -1,0 +1,63 @@
+#=================================================
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+# Lisence: MIT
+# Author: P3TERX
+# Blog: https://p3terx.com
+#=================================================
+
+name: Build testRelease
+
+on: 
+  release:
+    types: [published]
+#  push:
+#    branches: 
+#      - master
+#    paths:
+#      - 'ykl1.config'
+#  schedule:
+#    - cron: 0 8 * * 5
+#  watch:
+#    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: mkdir -p /usr/share/artifact
+      run: echo "Deleting files, please wait ..." >/usr/share/artifact/mytext.bin
+
+    - name: Upload bin directory
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Test-artifact
+        path: /usr/share/artifact
+
+    - name: Organize files
+      run: |
+        release=`curl -s https://github.com/yulinsoft/Actions-OpenWrt/releases/latest | cut -d '"' -f 2 | cut -d '/' -f 8`
+        echo $release
+        uploadurl="https://uploads.github.com/repos/yulinsoft/Actions-OpenWrt/releases/$release/assets{?name,label}"
+        echo $uploadurl
+        echo "::set-env name=UPLOADURL::$uploadurl"
+
+      - name: Upload Release Asset
+        id: upload-release-asset 
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ env.UPLOADURL }}
+          asset_path: /usr/share/artifact/mytext.bin
+          asset_name: mytext.bin
+          asset_content_type: application/octet-stream
+
