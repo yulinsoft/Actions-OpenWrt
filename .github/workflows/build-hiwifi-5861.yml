@@ -11,11 +11,11 @@ name: Build Hiwifi-5861
 on: 
   release:
     types: [published]
-#  push:
-#    branches: 
-#      - master
-#    paths:
-#      - 'hiwifi-5861.config'
+  push:
+    branches: 
+      - master
+    paths:
+      - 'LICENSE'
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
