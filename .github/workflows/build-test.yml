@@ -34,7 +34,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         mkdir -p /usr/share/artifact
-        dd if=/dev/zero of=/usr/share/artifact/mytext.bin bs=1M count=20
+        dd if=/dev/zero of=/usr/share/artifact/mytext.bin bs=1M count=10
 #        echo "this is my test......" >/usr/share/artifact/mytext.bin
     - name: Upload to artifact
       uses: actions/upload-artifact@master
