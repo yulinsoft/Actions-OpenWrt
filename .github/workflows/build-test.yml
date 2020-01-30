@@ -32,8 +32,9 @@ jobs:
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
-      run: mkdir -p /usr/share/artifact
-      run: echo "Deleting files, please wait ..." >/usr/share/artifact/mytext.bin
+      run: |
+        mkdir -p /usr/share/artifact
+        echo "Deleting files, please wait ..." >/usr/share/artifact/mytext.bin
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
