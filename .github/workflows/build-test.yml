@@ -1,0 +1,59 @@
+#=================================================
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+# Lisence: MIT
+# Author: P3TERX
+# Blog: https://p3terx.com
+#=================================================
+
+name: Build testRelease
+
+on: 
+  release:
+    types: [published]
+  push:
+    branches: 
+      - master
+    paths:
+      - 'LICENSE1'
+#  schedule:
+#    - cron: 0 8 * * 5
+#  watch:
+#    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        mkdir -p /usr/share/artifact
+        echo "this is my test......" >/usr/share/artifact/mytext.bin
+    - name: Upload to artifact
+      uses: actions/upload-artifact@master
+      if: always()
+      with:
+        name: Test-artifact
+        path: /usr/share/artifact
+
+    - name: Get uploadUrl
+      run: |
+        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
+        echo $uploadurl
+        echo "::set-env name=UPLOADURL::$uploadurl"
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOADURL }}
+        asset_path: /usr/share/artifact/mytext.bin
+        asset_name: mytext.bin
+        asset_content_type: application/octet-stream
