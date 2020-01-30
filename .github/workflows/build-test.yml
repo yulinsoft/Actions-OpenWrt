@@ -29,11 +29,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Setup node
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
-
     - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
@@ -52,7 +47,7 @@ jobs:
       run: |
         release=`curl -s https://github.com/yulinsoft/Actions-OpenWrt/releases/latest | cut -d '"' -f 2 | cut -d '/' -f 8`
         echo $release
-        uploadurl="https://uploads.github.com/repos/yulinsoft/Actions-OpenWrt/releases/$release/assets{?name,label}"
+        uploadurl="https://uploads.github.com/repos/yulinsoft/Actions-OpenWrt/releases/$release/assets?name=mytext.bin"
         echo $uploadurl
         echo "::set-env name=UPLOADURL::$uploadurl"
 
