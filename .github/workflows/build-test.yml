@@ -23,7 +23,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
@@ -36,18 +36,16 @@ jobs:
         mkdir -p /usr/share/artifact
         echo "Deleting files, please wait ..." >/usr/share/artifact/mytext.bin
 
-    - name: Upload bin directory
+    - name: Upload to artifact
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: Test-artifact
         path: /usr/share/artifact
 
-    - name: Organize files
+    - name: Get uploadUrl
       run: |
-        release=`curl -s https://github.com/yulinsoft/Actions-OpenWrt/releases/latest | cut -d '"' -f 2 | cut -d '/' -f 8`
-        echo $release
-        uploadurl="https://uploads.github.com/repos/yulinsoft/Actions-OpenWrt/releases/$release/assets?name=mytext.bin"
+        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
         echo $uploadurl
         echo "::set-env name=UPLOADURL::$uploadurl"
 
