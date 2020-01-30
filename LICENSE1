@@ -1,3 +1,3 @@
 LICENSE
 /usr/share/artifact/mytext.bin
-dd if=/dev/zero of=/file bs=1M count=10
+dd if=/dev/zero of=/file bs=1M count=5
