@@ -6,7 +6,7 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build Hiwifi-B70
+name: Build Newifi-3
 
 on: 
   release:
@@ -15,7 +15,7 @@ on:
 #    branches: 
 #      - master
 #    paths:
-#      - 'B70.config'
+#      - 'newifi3.config'
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
@@ -60,8 +60,8 @@ jobs:
 
     - name: Load custom configuration
       env:
-        CONFIG_FILE: 'B70.config'
-        DIY_SH: 'diy.sh'
+        CONFIG_FILE: 'newifi3.config'
+        DIY_SH: 'comdiy.sh'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -95,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_Hiwifi-B70_bin
+        name: OpenWrt_newifi-3_bin
         path: openwrt/bin
 
     - name: Organize files
@@ -109,5 +109,22 @@ jobs:
       uses: actions/upload-artifact@master
       if: always()
       with:
-        name: OpenWrt_Hiwifi-B70_firmware
+        name: OpenWrt_newifi-3_firmware
         path: ${{ env.FIRMWARE }}
+
+    - name: Get uploadUrl
+      run: |
+        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
+        echo $uploadurl
+        echo "::set-env name=UPLOADURL::$uploadurl"
+
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOADURL }}
+        asset_path: openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
+        asset_name: openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
+        asset_content_type: application/octet-stream

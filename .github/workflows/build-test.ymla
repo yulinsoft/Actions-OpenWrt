@@ -29,12 +29,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: Initialization environment
+    - name: Create file to upload
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
         mkdir -p /usr/share/artifact
-        echo "Deleting files, please wait ..." >/usr/share/artifact/mytext.bin
+        echo "This is a test." >/usr/share/artifact/mytext.bin
 
     - name: Upload to artifact
       uses: actions/upload-artifact@master
