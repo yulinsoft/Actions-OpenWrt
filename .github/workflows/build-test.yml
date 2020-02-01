@@ -36,11 +36,11 @@ jobs:
         mkdir -p /usr/share/artifact
         filename=test-`date +%Y-%m-%d-%s`.bin
         echo filename is : $filename
+        echo "::set-env name=FILENAME::$filename"
         dd if=/dev/zero of=/usr/share/artifact/filename bs=1M count=1
         df -h
         pwd
-        
-#        echo "this is my test......" >/usr/share/artifact/mytext.bin
+
     - name: Upload to artifact
       uses: actions/upload-artifact@master
       if: always()
@@ -60,6 +60,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: /usr/share/artifact/filename
-        asset_name: filename
+        asset_path: /usr/share/artifact/${{ env.FILENAME }}
+        asset_name: ${{ env.FILENAME }}
         asset_content_type: application/octet-stream
