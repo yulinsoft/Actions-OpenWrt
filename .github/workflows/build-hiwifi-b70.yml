@@ -136,6 +136,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
-        asset_name: openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
+        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
+        asset_name: hiwifi_hc5962-squashfs-factory.bin
         asset_content_type: application/octet-stream

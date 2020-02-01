@@ -125,6 +125,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: openwrt/bin/targets/ramips/mt7620/openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
-        asset_name: openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
+        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7620/openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
+        asset_name: hiwifi_hc5861-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream

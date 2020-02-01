@@ -125,6 +125,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
-        asset_name: openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
+        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
+        asset_name: Newifi-3-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream
