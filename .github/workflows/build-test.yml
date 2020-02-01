@@ -34,7 +34,7 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         mkdir -p /usr/share/artifact
-        dd if=/dev/zero of=/usr/share/artifact/mytext2.bin bs=1M count=20
+        dd if=/dev/zero of=/usr/share/artifact/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-sysupgrade.bin bs=1M count=20
 #        echo "this is my test......" >/usr/share/artifact/mytext.bin
     - name: Upload to artifact
       uses: actions/upload-artifact@master
@@ -55,6 +55,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: /usr/share/artifact/mytext2.bin
-        asset_name: mytext2.bin
+        asset_path: /usr/share/artifact/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-sysupgrade.bin
+        asset_name: openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream
