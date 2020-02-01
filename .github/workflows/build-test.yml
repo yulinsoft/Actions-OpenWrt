@@ -37,7 +37,7 @@ jobs:
         filename=test-`date +%Y-%m-%d-%s`.bin
         echo filename is : $filename
         echo "::set-env name=FILENAME::$filename"
-        dd if=/dev/zero of=/usr/share/artifact/filename bs=1M count=1
+        dd if=/dev/zero of=/usr/share/artifact/$filename bs=1M count=1
         df -h
         pwd
 
