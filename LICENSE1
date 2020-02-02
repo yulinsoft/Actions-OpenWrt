@@ -10,3 +10,4 @@ ${{ env.FILENAME }}
 
 ${{ github.event.release.upload_url }}
 时区问题
+sudo rm -f /swapfile
