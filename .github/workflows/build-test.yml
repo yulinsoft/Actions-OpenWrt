@@ -41,6 +41,8 @@ jobs:
         df -h
         pwd
         sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        sudo swapoff /swapfile
+        sudo rm -f /swapfile
 
     - name: Upload to artifact
       uses: actions/upload-artifact@master
