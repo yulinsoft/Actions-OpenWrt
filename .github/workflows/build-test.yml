@@ -48,18 +48,12 @@ jobs:
         name: Test-artifact
         path: /usr/share/artifact
 
-    - name: Get uploadUrl
-      run: |
-        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
-        echo $uploadurl
-        echo "::set-env name=UPLOADURL::$uploadurl"
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload Release Asset 
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        upload_url: ${{ env.UPLOADURL }}
+        upload_url: ${{ github.event.release.upload_url }}
         asset_path: /usr/share/artifact/${{ env.FILENAME }}
         asset_name: ${{ env.FILENAME }}
         asset_content_type: application/octet-stream
