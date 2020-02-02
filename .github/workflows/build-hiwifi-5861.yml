@@ -119,6 +119,10 @@ jobs:
         pwd
         echo $uploadurl
         echo "::set-env name=UPLOADURL::$uploadurl"
+        filename=openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
+        echo filename is : $filename
+        echo "::set-env name=FILENAME::$filename"
+        dd if=/dev/zero of=/mnt/$filename bs=1M count=17
 
     - name: Upload Release Asset
       id: upload-release-asset 
@@ -127,6 +131,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7620/openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
-        asset_name: hiwifi_hc5861-squashfs-sysupgrade.bin
+        asset_path: /mnt/${{ env.FILENAME }}
+        asset_name: ${{ env.FILENAME }}
         asset_content_type: application/octet-stream
