@@ -40,6 +40,7 @@ jobs:
         dd if=/dev/zero of=/usr/share/artifact/$filename bs=1M count=1
         df -h
         pwd
+        sudo ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
     - name: Upload to artifact
       uses: actions/upload-artifact@master
