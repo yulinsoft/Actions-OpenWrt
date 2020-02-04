@@ -119,18 +119,23 @@ jobs:
         pwd
         echo $uploadurl
         echo "::set-env name=UPLOADURL::$uploadurl"
-        filename=openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
-        echo filename is : $filename
-        echo "::set-env name=FILENAME::$filename"
-        dd if=/dev/zero of=/usr/share/$filename bs=1M count=17
 
-    - name: Upload Release Asset
-      id: upload-release-asset 
+    - name: Upload sysupgrade Asset
       uses: actions/upload-release-asset@v1.0.1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       with:
         upload_url: ${{ env.UPLOADURL }}
-        asset_path: /usr/share/${{ env.FILENAME }}
-        asset_name: ${{ env.FILENAME }}
+        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-sysupgrade.bin
+        asset_name: hiwifi_hc5962-squashfs-sysupgrade.bin
+        asset_content_type: application/octet-stream
+
+    - name: Upload factory Asset
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
+      with:
+        upload_url: ${{ env.UPLOADURL }}
+        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
+        asset_name: hiwifi_hc5962-squashfs-factory.bin
         asset_content_type: application/octet-stream
