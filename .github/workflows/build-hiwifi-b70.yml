@@ -18,8 +18,8 @@ on:
       - 'diy.sh'
 #  schedule:
 #    - cron: 0 8 * * 5
-#  watch:
-#    types: [started]
+  watch:
+    types: [started]
 
 jobs:
   build:
@@ -103,14 +103,15 @@ jobs:
       run: |
         cd openwrt/bin/targets/*/*
         rm -rf packages
-        echo "::set-env name=FIRMWARE::$(pwd)"
+        echo "firmware=$(pwd)" >> $GITHUB_ENV
+        
 
     - name: Upload firmware
       uses: actions/upload-artifact@master
       if: always()
       with:
         name: OpenWrt_Hiwifi-B70_firmware
-        path: ${{ env.FIRMWARE }}
+        path: $firmware
 
     - name: Get uploadUrl
       run: |
@@ -118,14 +119,14 @@ jobs:
         df -h
         pwd
         echo $uploadurl
-        echo "::set-env name=UPLOADURL::$uploadurl"
+        echo "uploadurl=$uploadurl" >> $GITHUB_ENV
 
     - name: Upload sysupgrade Asset
       uses: actions/upload-release-asset@v1.0.1
       env:
         GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       with:
-        upload_url: ${{ env.UPLOADURL }}
+        upload_url: $uploadurl
         asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-sysupgrade.bin
         asset_name: hiwifi_hc5962-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream
@@ -135,7 +136,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
       with:
-        upload_url: ${{ env.UPLOADURL }}
+        upload_url: $uploadurl
         asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-hiwifi_hc5962-squashfs-factory.bin
         asset_name: hiwifi_hc5962-squashfs-factory.bin
         asset_content_type: application/octet-stream
