@@ -1,9 +1,6 @@
 # Actions-OpenWrt
-![Build Hiwifi-5861](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Hiwifi-5861/badge.svg)
-![Build Youku-L1](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Youku-L1/badge.svg)
-![Build Hiwifi-B70](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Hiwifi-B70/badge.svg)
-![Build Newifi-3](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20Newifi-3/badge.svg)
 
+![Build OpenWrt](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20OpenWrt/badge.svg?branch=master&event=release)
 
 
 Build OpenWrt using GitHub Actions
