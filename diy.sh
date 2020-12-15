@@ -33,3 +33,7 @@ sed -i '/$1$V4UetPzk$CYXluq4wUazHjmCDBCqXF./d' package/lean/default-settings/fil
 # frpc 0.21.0
 sed -i 's/0.31.1/0.21.0/g' package/lean/frpc/Makefile
 echo 'modify completed.'
+
+
+
+
