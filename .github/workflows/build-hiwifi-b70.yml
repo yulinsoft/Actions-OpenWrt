@@ -11,11 +11,11 @@ name: Build Hiwifi-B70
 on: 
   release:
     types: [published]
-  push:
-    branches: 
-      - master
-    paths:
-      - 'diy.sh'
+#  push:
+#    branches: 
+#      - master
+#    paths:
+#      - 'diy.sh'
 #  schedule:
 #    - cron: 0 8 * * 5
   watch:
