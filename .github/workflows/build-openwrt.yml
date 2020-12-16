@@ -16,6 +16,7 @@ on:
       - master
     paths:
       - 'LICENSE'
+  workflow_dispatch:
 #  schedule:
 #    - cron: 0 8 * * 5
 #  watch:
