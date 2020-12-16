@@ -1,6 +1,6 @@
 # Actions-OpenWrt
 
-![Build OpenWrt](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20OpenWrt/badge.svg?branch=master&event=release)
+![Build OpenWrt](https://github.com/yulinsoft/Actions-OpenWrt/workflows/Build%20OpenWrt/badge.svg)
 
 
 Build OpenWrt using GitHub Actions
