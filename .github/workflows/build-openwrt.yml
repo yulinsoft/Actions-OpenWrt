@@ -77,30 +77,6 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
 
-    - name: Load ykl1 configuration
-      env:
-        CONFIG_FILE: 'ykl1.config'
-        DIY_SH: 'comdiy.sh'
-      run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        ../$DIY_SH
-        make defconfig
-
-    - name: Download ykl1 package
-      run: |
-        cd openwrt && make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
-
-    - name: Multi-thread compile ykl1
-      run: |
-        cd openwrt
-        echo -e "$(nproc) thread compile"
-        make -j$(nproc)
-
     - name: Load newifi3 configuration
       env:
         CONFIG_FILE: 'newifi3.config'
@@ -120,6 +96,30 @@ jobs:
         find dl -size -1024c -exec rm -f {} \;
 
     - name: Multi-thread compile newifi3
+      run: |
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc)
+
+    - name: Load ykl1 configuration
+      env:
+        CONFIG_FILE: 'ykl1.config'
+        DIY_SH: 'comdiy.sh'
+      run: |
+        [ -e files ] && mv files openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        chmod +x $DIY_SH
+        cd openwrt
+        ../$DIY_SH
+        make defconfig
+
+    - name: Download ykl1 package
+      run: |
+        cd openwrt && make download -j8
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
+
+    - name: Multi-thread compile ykl1
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
@@ -148,6 +148,7 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc)
+
     - name: Get uploadUrl
       run: |
         uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
