@@ -144,6 +144,9 @@ jobs:
         asset_name: Newifi-3-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream
 
+    - name: Clean cache
+      run: cd openwrt && make clean
+
     - name: Load ykl1 configuration
       env:
         CONFIG_FILE: 'ykl1.config'
