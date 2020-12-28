@@ -58,10 +58,18 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: Get uploadUrl
+      run: |
+        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
+        df -h
+        pwd
+        echo $uploadurl
+        echo "UPLOADURL=$uploadurl" >> $GITHUB_ENV
+
     - name: Load B70 configuration
       env:
         CONFIG_FILE: 'B70.config'
-        DIY_SH: 'comdiy.sh'
+        DIY_SH: 'diy7621.sh'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -81,14 +89,6 @@ jobs:
         cd openwrt
         echo -e "$(nproc) thread compile"
         make V=s
-
-    - name: Get uploadUrl
-      run: |
-        uploadurl=`curl -s  https://api.github.com/repos/yulinsoft/Actions-OpenWrt/releases/latest | sed -n '/upload_url/p' |  cut -d '"' -f 4`
-        df -h
-        pwd
-        echo $uploadurl
-        echo "UPLOADURL=$uploadurl" >> $GITHUB_ENV
 
     - name: Upload B70 sysupgrade Asset
       uses: actions/upload-release-asset@v1.0.1
@@ -113,7 +113,7 @@ jobs:
     - name: Load newifi3 configuration
       env:
         CONFIG_FILE: 'newifi3.config'
-        DIY_SH: 'comdiy.sh'
+        DIY_SH: 'diy7621.sh'
       run: |
         [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
@@ -142,72 +142,4 @@ jobs:
         upload_url: ${{ env.UPLOADURL }}
         asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7621/openwrt-ramips-mt7621-d-team_newifi-d2-squashfs-sysupgrade.bin
         asset_name: Newifi-3-squashfs-sysupgrade.bin
-        asset_content_type: application/octet-stream
-
-    - name: Load ykl1 configuration
-      env:
-        CONFIG_FILE: 'ykl1.config'
-        DIY_SH: 'comdiy.sh'
-      run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        ../$DIY_SH
-        make defconfig
-
-    - name: Download ykl1 package
-      run: |
-        cd openwrt && make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
-
-    - name: Multi-thread compile ykl1
-      run: |
-        cd openwrt
-        echo -e "$(nproc) thread compile"
-        make V=s
-
-    - name: Upload ykl1 Release Asset
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
-      with:
-        upload_url: ${{ env.UPLOADURL }}
-        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7620/openwrt-ramips-mt7620-youku_yk1-squashfs-sysupgrade.bin
-        asset_name: Youku_yk1-squashfs-sysupgrade.bin
-        asset_content_type: application/octet-stream
-
-    - name: Load hiwifi-5861 configuration
-      env:
-        CONFIG_FILE: 'hiwifi-5861.config'
-        DIY_SH: 'comdiy.sh'
-      run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        ../$DIY_SH
-        make defconfig
-
-    - name: Download hiwifi-5861 package
-      run: |
-        cd openwrt && make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
-
-    - name: Multi-thread compile hiwifi-5861
-      run: |
-        cd openwrt
-        echo -e "$(nproc) thread compile"
-        make V=s
-
-    - name: Upload hiwifi-5861 Release Asset
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_TOKEN }}
-      with:
-        upload_url: ${{ env.UPLOADURL }}
-        asset_path: /home/runner/work/Actions-OpenWrt/Actions-OpenWrt/openwrt/bin/targets/ramips/mt7620/openwrt-ramips-mt7620-hiwifi_hc5861-squashfs-sysupgrade.bin
-        asset_name: hiwifi_hc5861-squashfs-sysupgrade.bin
         asset_content_type: application/octet-stream
